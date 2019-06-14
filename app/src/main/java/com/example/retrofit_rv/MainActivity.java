@@ -21,23 +21,23 @@ private RecyclerView rv;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Services service=Client.getinstance().create(Services.class);
-        Call<List<RetroPhoto>> call=service.getphoto();
-        call.enqueue(new Callback<List<RetroPhoto>>() {
+        Call<RetroPhoto> call=service.getPopularMovies("dbea4e917d02e56372d6083c682aeab6","en-US", 2);
+        call.enqueue(new Callback<RetroPhoto>() {
             @Override
-            public void onResponse(Call<List<RetroPhoto>> call, Response<List<RetroPhoto>> response) {
+            public void onResponse(Call<RetroPhoto> call, Response<RetroPhoto> response) {
                 generatelist(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<RetroPhoto>> call, Throwable t) {
+            public void onFailure(Call<RetroPhoto> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void generatelist(List<RetroPhoto> body) {
+    private void generatelist(RetroPhoto body) {
         rv=findViewById(R.id.rv);
-        adapter=new CustomAdapter(this,body);
+        adapter=new CustomAdapter(this,body.getMovies());
         RecyclerView.LayoutManager lm=new LinearLayoutManager(MainActivity.this);
         rv.setLayoutManager(lm);
         rv.setAdapter(adapter);

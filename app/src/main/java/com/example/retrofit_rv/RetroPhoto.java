@@ -1,36 +1,57 @@
 package com.example.retrofit_rv;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class RetroPhoto {
-    @SerializedName("albumId")
-    private Integer albumId;
-    @SerializedName("id")
-    private Integer id;
-    @SerializedName("title")
-    private String title;
-    @SerializedName("url")
-    private String url;
-    @SerializedName("thumbnailUrl")
-    private String thumbnailUrl;
+    @SerializedName("page")
+    @Expose
+    private int page;
 
-    public RetroPhoto(Integer albumId, Integer id, String title, String url, String thumbnailUrl) {
-        this.albumId = albumId;
-        this.id = id;
-        this.title = title;
-        this.url = url;
-        this.thumbnailUrl = thumbnailUrl;
+    @SerializedName("total_results")
+    @Expose
+    private int totalResults;
+
+    @SerializedName("results")
+    @Expose
+    private List<movie> movies;
+
+    @SerializedName("total_pages")
+    @Expose
+    private int totalPages;
+
+    public int getPage() {
+        return page;
     }
 
-    public Integer getAlbumId() {
-        return albumId;
+    public void setPage(int page) {
+        this.page = page;
     }
 
-    public String getTitle() {
-        return title;
+    public int getTotalResults() {
+        return totalResults;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
+    public void setTotalResults(int totalResults) {
+        this.totalResults = totalResults;
     }
+
+    public List<movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<movie> movies) {
+        this.movies = movies;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
+
 }
